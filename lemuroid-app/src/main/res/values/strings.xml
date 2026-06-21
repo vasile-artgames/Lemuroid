@@ -131,9 +131,13 @@
     <string name="game_menu_cheats_add">Add cheat</string>
     <string name="game_menu_cheats_empty">No cheats added yet</string>
     <string name="game_menu_saves_manager">Manage Saves</string>
-    <string name="game_menu_saves_export">Export saves</string>
-    <string name="game_menu_saves_import">Import saves</string>
-    <string name="game_menu_saves_success">Saves transferred successfully (%d files)</string>
+    <string name="game_menu_saves_export">Export saves (ZIP)</string>
+    <string name="game_menu_saves_import_srm">Import SRAM (.srm)</string>
+    <string name="game_menu_saves_import_state">Import Save State (.state)</string>
+    <string name="game_menu_saves_slot_select">Select target slot</string>
+    <string name="game_menu_saves_slot_auto">Auto-save</string>
+    <string name="game_menu_saves_slot_n">Slot %d</string>
+    <string name="game_menu_saves_success">Import successful</string>
     <string name="game_menu_saves_error">Error: %s</string>
     <string name="game_menu_saves_working">Working…</string>
 

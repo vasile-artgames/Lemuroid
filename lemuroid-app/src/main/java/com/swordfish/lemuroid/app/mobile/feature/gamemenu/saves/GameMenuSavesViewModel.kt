@@ -29,29 +29,55 @@ class GameMenuSavesViewModel(
         data class Error(val message: String) : TransferState()
     }
 
+    data class PendingStateImport(val stateUri: Uri, val metadataUri: Uri?)
+
     private val _transferState = MutableStateFlow<TransferState>(TransferState.Idle)
     val transferState: StateFlow<TransferState> = _transferState
+
+    private val _pendingStateImport = MutableStateFlow<PendingStateImport?>(null)
+    val pendingStateImport: StateFlow<PendingStateImport?> = _pendingStateImport
 
     fun exportSaves(uri: Uri) {
         viewModelScope.launch {
             _transferState.value = TransferState.Working
             val result = exporter.exportToUri(getApplication(), game, coreID, uri)
             _transferState.value = result.fold(
-                onSuccess = { count -> TransferState.Success(count.toString()) },
+                onSuccess = { TransferState.Success("ok") },
                 onFailure = { e -> TransferState.Error(e.message ?: "Unknown error") },
             )
         }
     }
 
-    fun importSaves(uri: Uri) {
+    fun importSrm(uri: Uri) {
         viewModelScope.launch {
             _transferState.value = TransferState.Working
-            val result = importer.importFromUri(getApplication(), game, coreID, uri)
+            val result = importer.importSrm(getApplication(), game, uri)
             _transferState.value = result.fold(
-                onSuccess = { count -> TransferState.Success(count.toString()) },
+                onSuccess = { TransferState.Success("ok") },
                 onFailure = { e -> TransferState.Error(e.message ?: "Unknown error") },
             )
         }
+    }
+
+    fun onStateFilesSelected(stateUri: Uri, metadataUri: Uri?) {
+        _pendingStateImport.value = PendingStateImport(stateUri, metadataUri)
+    }
+
+    fun importState(slot: Int) {
+        val pending = _pendingStateImport.value ?: return
+        _pendingStateImport.value = null
+        viewModelScope.launch {
+            _transferState.value = TransferState.Working
+            val result = importer.importState(getApplication(), game, coreID, pending.stateUri, pending.metadataUri, slot)
+            _transferState.value = result.fold(
+                onSuccess = { TransferState.Success("ok") },
+                onFailure = { e -> TransferState.Error(e.message ?: "Unknown error") },
+            )
+        }
+    }
+
+    fun dismissSlotDialog() {
+        _pendingStateImport.value = null
     }
 
     class Factory(
