@@ -45,9 +45,13 @@ import androidx.navigation.compose.rememberNavController
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.coreoptions.GameMenuCoreOptionsScreen
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.coreoptions.GameMenuCoreOptionsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.gamemenu.saves.GameMenuSavesScreen
+import com.swordfish.lemuroid.app.mobile.feature.gamemenu.saves.GameMenuSavesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.states.GameMenuStatesScreen
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.states.GameMenuStatesViewModel
 import com.swordfish.lemuroid.lib.cheats.CheatEntry
+import com.swordfish.lemuroid.lib.saves.SaveStatesExporter
+import com.swordfish.lemuroid.lib.saves.SaveStatesImporter
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.shared.coreoptions.LemuroidCoreOption
@@ -71,6 +75,12 @@ class GameMenuActivity : RetrogradeComponentActivity() {
 
     @Inject
     lateinit var statesPreviewManager: StatesPreviewManager
+
+    @Inject
+    lateinit var saveStatesExporter: SaveStatesExporter
+
+    @Inject
+    lateinit var saveStatesImporter: SaveStatesImporter
 
     private var latestCheats: List<CheatEntry> = emptyList()
 
@@ -253,6 +263,20 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                         GameMenuCheatsScreen(
                             cheats = gameMenuRequest.cheats,
                             onCheatsChanged = { latestCheats = it },
+                        )
+                    }
+                    composable(GameMenuRoute.SAVES_MANAGER) {
+                        GameMenuSavesScreen(
+                            viewModel(
+                                factory = GameMenuSavesViewModel.Factory(
+                                    application,
+                                    gameMenuRequest.game,
+                                    gameMenuRequest.coreConfig.coreID,
+                                    saveStatesExporter,
+                                    saveStatesImporter,
+                                ),
+                            ),
+                            gameMenuRequest.game,
                         )
                     }
                 }

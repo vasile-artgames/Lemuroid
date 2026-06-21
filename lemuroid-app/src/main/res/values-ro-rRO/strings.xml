@@ -109,6 +109,12 @@
     <string name="game_menu_cheats_desc_hint">Descriere (opțional)</string>
     <string name="game_menu_cheats_add">Adaugă cheat</string>
     <string name="game_menu_cheats_empty">Nu există cheat-uri adăugate</string>
+    <string name="game_menu_saves_manager">Gestionare salvări</string>
+    <string name="game_menu_saves_export">Exportă salvările</string>
+    <string name="game_menu_saves_import">Importă salvările</string>
+    <string name="game_menu_saves_success">Salvările au fost transferate cu succes (%d fișiere)</string>
+    <string name="game_menu_saves_error">Eroare: %s</string>
+    <string name="game_menu_saves_working">Se procesează…</string>
     <string name="game_loading_preparing_game">Se pregătește jocul…</string>
     <string name="game_toast_settings_button_using_gamepad">Gamepad detectat. Acces la meniul Setări cu %1$s.</string>
     <string name="game_toast_load_state_failed">Nu se poate încărca această stare</string>

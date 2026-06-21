@@ -49,6 +49,11 @@ enum class GameMenuRoute(
         titleId = R.string.game_menu_cheats,
         parent = HOME,
     ),
+    SAVES_MANAGER(
+        route = "saves_manager",
+        titleId = R.string.game_menu_saves_manager,
+        parent = HOME,
+    ),
     ;
 
     fun canGoBack(): Boolean {

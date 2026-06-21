@@ -130,6 +130,12 @@
     <string name="game_menu_cheats_desc_hint">Description (optional)</string>
     <string name="game_menu_cheats_add">Add cheat</string>
     <string name="game_menu_cheats_empty">No cheats added yet</string>
+    <string name="game_menu_saves_manager">Manage Saves</string>
+    <string name="game_menu_saves_export">Export saves</string>
+    <string name="game_menu_saves_import">Import saves</string>
+    <string name="game_menu_saves_success">Saves transferred successfully (%d files)</string>
+    <string name="game_menu_saves_error">Error: %s</string>
+    <string name="game_menu_saves_working">Working…</string>
 
     <string name="game_loading_preparing_game">Preparing game…</string>
 
