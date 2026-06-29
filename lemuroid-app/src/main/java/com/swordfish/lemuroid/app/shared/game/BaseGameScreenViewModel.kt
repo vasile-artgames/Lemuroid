@@ -304,7 +304,7 @@ class BaseGameScreenViewModel(
     }
 
     companion object {
-        private val DEFAULT_FAST_FORWARD_CYCLE_SPEEDS = listOf(1, 2, 4, 8, 16)
+        private val DEFAULT_FAST_FORWARD_CYCLE_SPEEDS = listOf(1, 2, 4)
     }
 
     suspend fun reset() =
