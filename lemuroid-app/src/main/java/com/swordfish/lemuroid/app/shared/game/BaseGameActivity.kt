@@ -144,7 +144,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             )
         }
 
-        if (system.id == SystemID.SNES || system.id == SystemID.NES) {
+        if (system.id == SystemID.SNES || system.id == SystemID.NES || system.id == SystemID.GBA || system.id == SystemID.GB || system.id == SystemID.GBC) {
             lifecycleScope.launch {
                 baseGameScreenViewModel.retroGameView.retroGameViewFlow()
                 val savedCheats = cheatsManager.loadGameCheats(game.id)
@@ -236,8 +236,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 this.putExtra(GameMenuContract.EXTRA_CURRENT_TILT_CONFIG, currentTiltConfiguration)
                 // TODO PADS... Make sure to avoid passing this if a physical pad is connected.
                 this.putExtra(GameMenuContract.EXTRA_TILT_ALL_CONFIGS, tiltConfigurations.toTypedArray())
-                this.putExtra(GameMenuContract.EXTRA_CHEATS_SUPPORTED, system.id == SystemID.SNES || system.id == SystemID.NES)
-                if (system.id == SystemID.SNES || system.id == SystemID.NES) {
+                this.putExtra(GameMenuContract.EXTRA_CHEATS_SUPPORTED, system.id == SystemID.SNES || system.id == SystemID.NES || system.id == SystemID.GBA || system.id == SystemID.GB || system.id == SystemID.GBC)
+                if (system.id == SystemID.SNES || system.id == SystemID.NES || system.id == SystemID.GBA || system.id == SystemID.GB || system.id == SystemID.GBC) {
                     this.putExtra(
                         GameMenuContract.EXTRA_CHEATS,
                         ArrayList(cheatsManager.loadGameCheats(game.id)),
